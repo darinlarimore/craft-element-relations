@@ -18,6 +18,10 @@ class ElementRelationsController extends Controller
     public function actionGetByElementId(): string
     {
         $elementId = (int) Craft::$app->request->getParam('elementId');
+        if (!$elementId) {
+            return '<span>None</span>';
+        }
+        
         $siteId = Craft::$app->request->getParam('siteId');
         $force = Craft::$app->request->getParam('force') === 'true';
         $elementRelations = CacheService::getElementRelationsCached($elementId, $force);
